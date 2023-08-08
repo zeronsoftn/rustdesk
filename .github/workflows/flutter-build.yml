@@ -32,6 +32,9 @@ env:
   RENDEZVOUS_SERVER: '${{ secrets.RENDEZVOUS_SERVER }}'
   UPLOAD_ARTIFACT: "${{ inputs.upload-artifact }}"
 
+permissions:
+  contents: write
+
 jobs:
   build-for-windows-flutter:
     name: ${{ matrix.job.target }} (${{ matrix.job.os }})
