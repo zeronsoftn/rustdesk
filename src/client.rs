@@ -2380,7 +2380,7 @@ pub trait Interface: Send + Clone + 'static + Sized {
     fn get_login_config_handler(&self) -> Arc<RwLock<LoginConfigHandler>>;
 
     fn is_force_relay(&self) -> bool {
-        true;
+        self.get_login_config_handler().read().unwrap().force_relay
     }
     fn swap_modifier_mouse(&self, _msg: &mut hbb_common::protos::message::MouseEvent) {}
 

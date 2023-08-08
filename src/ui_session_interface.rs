@@ -772,7 +772,7 @@ impl<T: InvokeUiSession> Session<T> {
         }
     }
 
-    pub fn reconnect(&self, true: bool) {
+    pub fn reconnect(&self, force_relay: bool) {
         self.send(Data::Close);
         let cloned = self.clone();
         // override only if true
