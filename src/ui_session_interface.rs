@@ -772,11 +772,11 @@ impl<T: InvokeUiSession> Session<T> {
         }
     }
 
-    pub fn reconnect(&self, force_relay: bool) {
+    pub fn reconnect(&self, true: bool) {
         self.send(Data::Close);
         let cloned = self.clone();
         // override only if true
-        if true == force_relay {
+        if true {
             cloned.lc.write().unwrap().force_relay = true;
         }
         let mut lock = self.thread.lock().unwrap();

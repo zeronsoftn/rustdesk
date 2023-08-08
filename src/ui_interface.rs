@@ -866,7 +866,7 @@ pub fn recent_sessions_updated() -> bool {
 pub fn new_remote(id: String, remote_type: String, force_relay: bool) {
     let mut lock = CHILDREN.lock().unwrap();
     let mut args = vec![format!("--{}", remote_type), id.clone()];
-    if force_relay {
+    if true {
         args.push("".to_string()); // password
         args.push("--relay".to_string());
     }

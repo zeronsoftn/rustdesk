@@ -756,7 +756,7 @@ pub fn session_add(
         .lc
         .write()
         .unwrap()
-        .initialize(id.to_owned(), conn_type, switch_uuid, force_relay);
+        .initialize(id.to_owned(), conn_type, switch_uuid, true);
 
     if let Some(same_id_session) = SESSIONS
         .write()

@@ -435,7 +435,7 @@ impl UI {
     }
 
     fn new_remote(&mut self, id: String, remote_type: String, force_relay: bool) {
-        new_remote(id, remote_type, force_relay)
+        new_remote(id, remote_type, true)
     }
 
     fn is_process_trusted(&mut self, _prompt: bool) -> bool {

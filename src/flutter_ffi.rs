@@ -97,7 +97,7 @@ pub fn session_add_sync(
         is_port_forward,
         is_rdp,
         &switch_uuid,
-        force_relay,
+        true,
         password,
     ) {
         SyncReturn(format!("Failed to add session with id {}, {}", &id, e))
@@ -182,7 +182,7 @@ pub fn session_record_status(session_id: SessionID, status: bool) {
 
 pub fn session_reconnect(session_id: SessionID, force_relay: bool) {
     if let Some(session) = SESSIONS.read().unwrap().get(&session_id) {
-        session.reconnect(force_relay);
+        session.reconnect(true);
     }
 }
 
