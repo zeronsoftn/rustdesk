@@ -125,6 +125,10 @@ void runMainApp(bool startService) async {
     bind.pluginSyncUi(syncTo: kAppTypeMain);
     bind.pluginListReload();
   }
+  final v= await bind.mainGetOption(key: "stop-service") == "Y";
+  if(v){
+    start_service(true);
+  }
   gFFI.userModel.refreshCurrentUser();
   runApp(App());
   // Set window option.

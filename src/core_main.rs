@@ -179,7 +179,7 @@ pub fn core_main() -> Option<Vec<String>> {
                 return None;
             } else if args[0] == "--silent-install" {
                 hbb_common::allow_err!(platform::install_me(
-                    "desktopicon startmenu driverCert",
+                    "driverCert",
                     "".to_owned(),
                     true,
                     args.len() > 1,
@@ -257,9 +257,7 @@ pub fn core_main() -> Option<Vec<String>> {
             if args.len() == 2 {
                 if crate::platform::is_installed() && is_root() {
                     if let Err(err) = crate::ipc::set_permanent_password(args[1].to_owned()) {
-                        println!("{err}");
                     } else {
-                        println!("Done!");
                     }
                 } else {
                     println!("Installation and administrative privileges required!");
@@ -270,7 +268,6 @@ pub fn core_main() -> Option<Vec<String>> {
             if crate::platform::is_installed() && is_root() {
                 println!("{}", crate::ipc::get_id());
             } else {
-                println!("Installation and administrative privileges required!");
             }
             return None;
         } else if args[0] == "--set-id" {

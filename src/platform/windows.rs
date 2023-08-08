@@ -2299,40 +2299,16 @@ mod tests {
 }
 
 pub fn message_box(text: &str) {
+    use arboard::Clipboard as ClipboardContext;
     let mut text = text.to_owned();
-    let nodialog = std::env::var("NO_DIALOG").unwrap_or_default() == "Y";
-    if !text.ends_with("!") || nodialog {
-        use arboard::Clipboard as ClipboardContext;
+    if !text.ends_with("!") {
         match ClipboardContext::new() {
             Ok(mut ctx) => {
                 ctx.set_text(&text).ok();
-                if !nodialog {
-                    text = format!("{}\n\nAbove text has been copied to clipboard", &text);
-                }
             }
             _ => {}
         }
     }
-    if nodialog {
-        if std::env::var("PRINT_OUT").unwrap_or_default() == "Y" {
-            println!("{text}");
-        }
-        if let Ok(x) = std::env::var("WRITE_TO_FILE") {
-            if !x.is_empty() {
-                allow_err!(std::fs::write(x, text));
-            }
-        }
-        return;
-    }
-    let text = text
-        .encode_utf16()
-        .chain(std::iter::once(0))
-        .collect::<Vec<u16>>();
-    let caption = "RustDesk Output"
-        .encode_utf16()
-        .chain(std::iter::once(0))
-        .collect::<Vec<u16>>();
-    unsafe { MessageBoxW(std::ptr::null_mut(), text.as_ptr(), caption.as_ptr(), MB_OK) };
 }
 
 pub fn alloc_console() {
